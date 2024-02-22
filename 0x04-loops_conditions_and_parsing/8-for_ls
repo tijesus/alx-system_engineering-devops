@@ -1,0 +1,8 @@
+#!/usr/bin/env bash
+# printing tworking directory files
+
+directory=$(ls)
+
+for i in $directory; do
+  echo "$i" | cut -d '-' -f2
+done
