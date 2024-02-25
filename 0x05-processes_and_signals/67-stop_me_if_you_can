@@ -1,0 +1,4 @@
+#!/usr/bin/env bash
+#print till infinity and killing to termminate
+
+pkill -f 7-highlander
