@@ -1,0 +1,4 @@
+#!/usr/bin/env bash
+#print till infinity and killing to termminate
+
+kill "$(pgrep -f 4-to_infinity_and_beyond)"
