@@ -1,0 +1,4 @@
+#!/usr/bin/env bash
+#print till infinity and killing to termminate
+
+kill -9 "$(pgrep -f highlander)"
