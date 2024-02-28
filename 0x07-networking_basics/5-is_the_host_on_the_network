@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 #script that prints ip addresses
 
-if [ "$#" -ne 1 ]
+if [ "$#" -ne 1 ];
 then
     echo "Usage: $0 {IP_ADDRESS}"
 else
