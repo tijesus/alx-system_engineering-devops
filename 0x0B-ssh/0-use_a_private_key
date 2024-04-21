@@ -1,1 +1,3 @@
-ssh ubuntu@54.82.178.160
+#!/usr/bin/env bash
+# connect the server with key inside ~/.ssh/school
+ssh -i ~/.ssh/school ubuntu@54.82.178.160
