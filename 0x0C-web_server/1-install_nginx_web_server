@@ -1,7 +1,12 @@
 #!/usr/bin/env bash
-# Install nginx on your web-01 server that listen on port 80
+# installing nginx
+# updating app
 sudo apt-get update
+# installing nginx
 sudo apt-get install nginx -y
-sudo ufw allow 'Nginx HTTP'
+# enable NGINX
+sudo ufw allow "Nginx HTTP"
+create a static page
 echo "Hello World!" | sudo tee /var/www/html/index.html
-sudo service restart nginx
+# restart server
+sudo service nginx restart
