@@ -1,0 +1,10 @@
+#!/usr/bin/env bash
+# Redirection - replaceing file with multiple line 
+sudo apt-get update
+sudo apt-get install nginx -y
+
+echo "Hello World!" | sudo tee /var/www/html/index.html
+new_string="string_to_replace;\n\trewrite ^\/redirect_me https:\/\/github.com\/tijesus permanent;"
+sudo sed -i "s/string_to_replace;/$new_string/" /etc/nginx/sites-enabled/default
+# restart server
+sudo service nginx restart
