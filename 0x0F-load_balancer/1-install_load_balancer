@@ -1,0 +1,31 @@
+#!/usr/bin/env bash
+# Script to install and configure HAProxy
+# Roundrobin algorithm distribution
+# HAProxy managed via an init script
+
+# Install HAproxy server.
+sudo apt-get -y update
+sudo apt-get -y install haproxy
+
+# Configuring the HAproxy server
+server_config=\
+"
+frontend web_frontend
+        bind *:80
+        mode http
+        default_backend web_backend
+backend web_backend
+        balance roundrobin
+        server 530686-web-01 54.157.158.3:80 check
+        server 530686-web-02 54.146.71.138:80 check
+"
+echo "$server_config" | sudo tee -a /etc/haproxy/haproxy.cfg
+
+# enable haproxy to be started by init script
+echo "ENABLED=1" | sudo tee -a /etc/default/haproxy
+
+# Testing the HAproxy configuration file
+sudo haproxy -c -f /etc/haproxy/haproxy.cfg
+
+# Restart the Nginx service
+sudo service haproxy restart
