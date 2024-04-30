@@ -5,16 +5,16 @@
 
 # Install HAproxy server.
 sudo apt-get -y update
-sudo apt-get -y install haproxy
+apt-get -y install haproxy 
 
 # Configuring the HAproxy server
 server_config=\
 "
-frontend web_frontend
+frontend gabriel_frontend
         bind *:80
         mode http
-        default_backend web_backend
-backend web_backend
+        default_backend gabriel_backend
+backend gabriel_backend
         balance roundrobin
         server 530686-web-01 54.157.158.3:80 check
         server 530686-web-02 54.146.71.138:80 check
