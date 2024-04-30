@@ -1,0 +1,28 @@
+#!/usr/bin/env bash
+# Creating custorm headers for
+# Http header that must be X-served
+
+# Installing nginx
+sudo apt-get update
+sudo apt-get install -y nginx
+
+# Adding Html page
+echo "Hello World" | sudo tee /var/www/html/index.html
+
+#redirecting a permanet move (301)
+new_string="server_name _;\n\trewrite ^\/redirect_me https:\/\/github.com\/tijesus permanent;"
+sudo sed -i "s/server_name _;/$new_string/" /etc/nginx/sites-enabled/default
+
+# Creating error 404 custom page
+echo "Ceci n'est pas une page" | sudo tee /var/www/html/404.html
+new_string="listen 80 default_server;\n\terror_page 404 \/404.html;\n\tlocation = \/404.html {\n\t\troot \/var\/www\/html;\n\t\tinternal;\n\t}"
+sudo sed -i "s/listen 80 default_server;/$new_string/" /etc/nginx/sites-enabled/default
+
+# Create HTTP Header
+sudo sed -i "/server_name _/a add_header X-Served-By $HOSTNAME;" /etc/nginx/sites-enabled/default
+
+# Testing the configurations
+sudo nginx -t
+
+# Restarting nginx
+sudo service nginx restart
