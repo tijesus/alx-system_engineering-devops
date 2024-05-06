@@ -37,6 +37,7 @@ frontend web_frontend_http
         bind *:80
         mode http
         # Moving the domain permanetly to the secured server
+        # Reditecting http to https
         http-request redirect scheme https code 301 unless { ssl_fc }
         default_backend web_backend
 
