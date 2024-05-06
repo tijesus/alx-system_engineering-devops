@@ -33,16 +33,16 @@ defaults
         errorfile 503 /etc/haproxy/errors/503.http
         errorfile 504 /etc/haproxy/errors/504.http
 
-frontend web_frontend_htpp
+frontend web_frontend_http
         bind *:80
         mode http
-        http-request set-header X-Forwarded-Proto http
+        # Moving the domain permanetly to the secured server
+        http-request redirect scheme https code 301 unless { ssl_fc }
         default_backend web_backend
 
-frontend web_frontend_htpps
-        bind *:443 ssl crt /etc/haproxy/certs/www.techblazer.tech
+frontend web_frontend_https
+        bind *:443 ssl crt /etc/haproxy/certs/www.techblazer.tech.pem
         http-request set-header X-Forwarded-Proto https
-    	http-request redirect scheme https code 301 unless { ssl_fc }
         default_backend web_backend
 
 backend web_backend

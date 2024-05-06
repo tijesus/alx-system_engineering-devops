@@ -40,7 +40,7 @@ frontend web_frontend_htpp
         default_backend web_backend
 
 frontend web_frontend_htpps
-        bind *:443 ssl crt /etc/haproxy/certs/www.techblazer.tech
+        bind *:443 ssl crt /etc/haproxy/certs/www.techblazer.tech.pem
         http-request set-header X-Forwarded-Proto https
         default_backend web_backend
 
