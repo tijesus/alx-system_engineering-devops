@@ -1,6 +1,5 @@
 #!/usr/bin/python3
-"""Using this REST API, for a received employee ID,
-displaying the title of completed user_todos."""
+"""Accessing a REST API for todo lists of employees"""
 
 import requests
 import sys
