@@ -1,6 +1,6 @@
 #!/usr/bin/python3
 """Using this REST API, for a received employee ID,
-displaying the title of completed tasks."""
+displaying the title of completed user_todos."""
 
 import requests
 import sys
@@ -8,20 +8,24 @@ import sys
 
 if __name__ == "__main__":
     user_id = sys.argv[1]
-    url = "https://jsonplaceholder.typicode.com/users/{}".format(user_id)
-    user_todos_url = "https://jsonplaceholder.typicode.com/users/{}/todos"\
-        .format(user_id)
-    response = requests.get(url).json()
-    username = response.get('name')
-    done_todos = 0
-    user_todos = requests.get(user_todos_url).json()
-    total_todos = len(user_todos)
-    for todo in user_todos:
-        if todo.get("completed"):
-            done_todos += 1
-    print("Employee {} is done with tasks ({}/{}):"
-          .format(username, done_todos, total_todos))
+    baseUrl = "https://jsonplaceholder.typicode.com/users"
+    url = baseUrl + "/" + user_id
 
-    for todos in user_todos:
-        if todos.get("completed"):
-            print("\t {}".format(todos.get("title")))
+    response = requests.get(url)
+    username = response.json().get('name')
+
+    todoUrl = url + "/todos"
+    response = requests.get(todoUrl)
+    user_todos = response.json()
+    done = 0
+
+    for todo in user_todos:
+        if todo.get('completed'):
+            done += 1
+
+    print("Employee {} is done with user_todos({}/{}):"
+          .format(username, done, len(user_todos)))
+
+    for todo in user_todos:
+        if todo.get('completed'):
+            print("\t {}".format(todo.get('title')))
