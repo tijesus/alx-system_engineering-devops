@@ -1,8 +1,6 @@
 #!/usr/bin/python3
-'''
-gather employee data from API
-'''
-
+"""Using this REST API, for a received employee ID,
+displaying the title of completed tasks."""
 import requests
 import sys
 
