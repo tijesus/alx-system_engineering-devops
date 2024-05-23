@@ -18,14 +18,15 @@ if __name__ == "__main__":
     response = requests.get(todoUrl)
     user_todos = response.json()
     done = 0
+    done_tasks = []
 
     for todo in user_todos:
         if todo.get('completed'):
+            done_tasks.append(todo)
             done += 1
 
     print("Employee {} is done with user_todos({}/{}):"
           .format(username, done, len(user_todos)))
 
-    for todo in user_todos:
-        if todo.get('completed'):
-            print("\t {}".format(todo.get('title')))
+    for todo in done_tasks:
+        print("\t {}".format(todo.get('title')))
