@@ -13,7 +13,7 @@ if __name__ == "__main__":
     user_todos = r.get(user_todos_url).json()
     with open('{}.csv'.format(user_id), 'w') as file:
         for todo in user_todos:
-            done_task_status = todo.get("completed")
+            done_task_stat = todo.get("completed")
             task_title = todo.get("title")
             file.write('"{}","{}","{}","{}"\n'
-                  .format(user_id, username, done_task_status, task_title))
+                       .format(user_id, username, done_task_stat, task_title))
