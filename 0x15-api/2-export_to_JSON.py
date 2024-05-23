@@ -3,6 +3,7 @@
 
 import requests as r
 import sys
+import json
 
 if __name__ == "__main__":
     user_id = sys.argv[1]
@@ -11,14 +12,17 @@ if __name__ == "__main__":
 
     response = r.get(url)
     username = response.json().get('username')
-    print(username)
-
     todoUrl = url + "/todos"
     response = r.get(todoUrl)
     user_todo = response.json()
 
-    with open('{}.csv'.format(user_id), 'w') as file:
-        for todo in user_todo:
-            file.write('"{}","{}","{}","{}"\n'
-                       .format(user_id, username, todo.get('completed'),
-                               todo.get('title')))
+    dict = {user_id: []}
+    for todo in user_todo:
+        dict[user_id].append({
+            "task": todo.get("title"),
+            "completed": todo.get('completed'),
+            "username": username
+        })
+
+    with open('{}.json'.format(user_id), 'w') as filename:
+        json.dump(dict, filename)
