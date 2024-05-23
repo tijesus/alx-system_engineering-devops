@@ -1,15 +1,14 @@
 #!/usr/bin/python3
-""" Exporting the employee data to csv"""
+""" Exporting the employee data to json"""
 
+import json
 import requests as r
 import sys
-import json
 
 if __name__ == "__main__":
     user_id = sys.argv[1]
     baseUrl = "https://jsonplaceholder.typicode.com/users"
     url = baseUrl + "/" + user_id
-
     response = r.get(url)
     username = response.json().get('username')
     todoUrl = url + "/todos"
