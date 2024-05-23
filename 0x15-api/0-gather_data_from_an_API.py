@@ -1,5 +1,7 @@
 #!/usr/bin/python3
-""" Getting data from an API """
+'''
+gather employee data from API
+'''
 
 import requests
 import sys
