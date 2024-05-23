@@ -11,7 +11,7 @@ if __name__ == '__main__':
     response = r.get(url)
     users = response.json()
 
-    dict = {}
+    dictionary = {}
     for user in users:
         user_id = user.get('id')
         username = user.get('username')
@@ -19,12 +19,12 @@ if __name__ == '__main__':
         url = url + '/todos/'
         response = r.get(url)
         tasks = response.json()
-        dict[user_id] = []
-        for todo in tasks:
-            dict[user_id].append({
-                "username": username,
-                "todo": todo.get('title'),
-                "completed": todo.get('completed')
+        dictionary[user_id] = []
+        for task in tasks:
+            dictionary[user_id].append({
+                "task": task.get('title'),
+                "completed": task.get('completed'),
+                "username": username
             })
     with open('todo_all_employees.json', 'w') as file:
-        json.dump(dict, file)
+        json.dump(dictionary, file)
