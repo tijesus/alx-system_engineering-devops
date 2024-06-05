@@ -11,8 +11,6 @@ if __name__ == "__main__":
 
     response = r.get(url)
     username = response.json().get('username')
-    print(username)
-
     todoUrl = url + "/todos"
     response = r.get(todoUrl)
     user_todo = response.json()
