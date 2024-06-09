@@ -73,6 +73,12 @@ By addressing these areas, we aim to enhance the reliability and stability of ou
 ---
 
 **Visual Breakdown**: The "phpp" Incident
+   ```puppet
+   exec { 'replace_line':
+     command => "sed -i 's/phpp/php/g' /var/www/html/wp-settings.phpp",
+     path    => ['/bin', '/usr/bin'],
+   }
+   ```
 
 **Caption**: One small typo for code, one giant headache for developers.
 
